@@ -1,25 +1,22 @@
 # RESURGE – Luxury Personal Gym LP
 
-高級パーソナルジム「RESURGE」を想定した架空のLP制作。  
-HTML / CSSで制作したポートフォリオ作品です。
+高級パーソナルジム「RESURGE」を想定した架空のLP制作。
+HTML / CSSで制作したポートフォリオ作品。
 
-🔗 Live Site  
+## Preview
+![RESURGE LP](preview.jpg)
+
+🔗 Live Site
 https://atelier-m.github.io/resurge-lp/
 
----
-
 ## コンセプト
-30代経営者をターゲットにした完全個室パーソナルジム。  
-「誰にも見られない。だから、本気になれる。」をテーマに  
-集中できる空間と高級感を表現しました。
-
----
+30代経営者をターゲットにした完全個室パーソナルジム。
+「誰にも見られない。だから、本気になれる。」をテーマに
+集中できる空間と高級感を表現。
 
 ## 担当
 Design / Copy / Coding
 
----
-
 ## 使用技術
-- HTML
-- CSS
+HTML  
+CSS
