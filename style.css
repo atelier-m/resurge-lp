@@ -1,0 +1,643 @@
+/* ===== 全体 ===== */
+:root{
+  --bg: #0f0f10;
+  --bg2:#0a0a0a;
+  --panel:#111113;
+  --text:#e5e5e5;
+  --muted:#aaa;
+  --line: rgba(255,255,255,0.15);
+  --line2: rgba(207,207,207,0.2);
+  --silver:#cfcfcf;
+}
+
+body{
+  margin:0;
+  font-family:'Noto Sans JP', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+/* ===== ヒーロー ===== */
+.hero{
+  position:relative;
+  min-height:100svh;
+  background:url("gym-hero.jpg") center/cover no-repeat;
+  background-attachment:fixed;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+@media (max-width:768px){
+  .hero{
+    background-attachment:scroll;
+  }
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  padding:20px;
+}
+
+.hero + section{
+  padding-top:90px;
+  box-shadow: none;
+}
+
+.hero h1{
+  letter-spacing:.4em;
+}
+
+/* ===== ロゴ（フェード） ===== */
+.logo{
+  font-size:35px;
+  letter-spacing:0.5em;
+  font-weight:300;
+  background:linear-gradient(90deg,#bfbfbf,#ffffff,#bfbfbf);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  opacity:0;
+  transform:translateY(-10px);
+  animation:fadeLogo 1s ease forwards;
+  animation-delay:0.2s;
+  margin:0 0 18px;
+  margin-bottom:32px;
+}
+
+@media (max-width:600px){
+
+.logo{
+font-size:28px;
+letter-spacing:0.35em;
+}
+
+}
+
+@keyframes fadeLogo{
+  to{ opacity:0.9; transform:translateY(0); }
+}
+
+.logo::after{
+  content:"";
+  display:block;
+  width:140px;
+  height:1px;
+  margin:18px auto 0;
+  background:linear-gradient(to right, transparent, var(--silver), transparent);
+}
+
+/* ===== キャッチ（フェード + ディレイ） ===== */
+.catch{
+  font-size:22px;
+  font-weight:600;
+  margin:0 0 15px;
+
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeCatch 1s ease forwards;
+  animation-delay:0.5s;
+  line-height:1.6;
+}
+
+@keyframes fadeCatch{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.catch span{ font-size:20px; }
+
+.sub{
+  font-size:14px;
+  color:var(--muted);
+  margin:0 0 30px;
+  margin-bottom:40px;
+}
+
+/* ===== ボタン（ヒーローだけフェード） ===== */
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border:2px solid var(--silver);
+  color:var(--silver);
+  text-decoration:none;
+  transition:0.3s;
+  margin-top:20px;
+}
+
+@media (max-width:600px){
+
+.btn{
+padding:16px 32px;
+font-size:15px;
+}
+
+}
+
+.hero .btn{
+  opacity:0;
+  animation:fadeBtn 1s ease forwards;
+  animation-delay:0.8s;
+}
+
+@keyframes fadeBtn{
+  to{ opacity:1; }
+}
+
+.btn:hover{
+  background:var(--silver);       /* ✅ シルバー反転 */
+  color:var(--bg);
+  transform:translateY(-2px);
+}
+
+/* =========================
+   セクション共通
+   ========================= */
+
+section{
+  padding:120px 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+@media (max-width: 600px){
+  section{ padding:90px 0; }
+}
+
+h2{
+  font-size:30px;
+  font-weight:300;
+  letter-spacing:.12em;
+  margin-bottom:70px;
+  position:relative;
+  padding-bottom:20px;
+}
+
+h2::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:140px;
+  height:1px;
+  background:linear-gradient(to right,#cfcfcf,transparent);
+  opacity:.6;
+}
+
+/* ===== メリハリ：セクション背景を交互に ===== */
+.problem, .features, .cta{ background:var(--bg); }
+.solution, .pricing, .trainer{ background:var(--bg2); }
+
+/* =========================
+   問題提起（左寄せ）
+   ========================= */
+.problem{
+  text-align:left;
+}
+
+.problem h2{
+  line-height:1.6;
+  position: relative;
+  padding-bottom: 18px;
+  margin-bottom: 26px;
+}
+
+.problem h2::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:140px;
+  height:1px;
+  background: linear-gradient(to right, #cfcfcf, transparent);
+  opacity: .6;
+}
+
+.problem-lead{
+  margin: 0 0 26px;
+  color: #c7c7c7;
+  letter-spacing: .04em;
+}
+
+
+
+.problem-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:12px;
+}
+
+.problem-list li{
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  padding: 14px 0 14px 28px !important; /* — のぶん左に余白 */
+  border-bottom: 0px;
+
+  position: relative; /* ← これ大事（::beforeの基準） */
+}
+
+.problem-list li::before{
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: .6;
+}
+
+.problem-note{
+  margin: 26px 0 0;
+  color:#aaa;
+  letter-spacing:.08em;
+}
+
+/* PCだけ2カラムで“デザインしてる感” */
+@media (min-width: 900px){
+  .problem-list{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 16px;
+  }
+}
+
+.problem ul{
+  list-style:none;
+  padding:0;
+  margin:30px 0 0;
+}
+
+/* ===== Solution ===== */
+.solution{
+  background:#0c0c0d;
+}
+
+.solution h2{
+  font-size:30px;
+  font-weight:300;
+  letter-spacing:.15em;
+  margin-bottom:60px;
+  text-align:left;
+}
+
+.solution-grid{
+  display:grid;
+  gap:40px;
+}
+
+/* コピー */
+.solution-copy{
+  color:#bdbdbd;
+  line-height:2;
+  letter-spacing:.05em;
+  max-width:34ch;
+}
+
+/* ポイント */
+.solution-points{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:18px;
+}
+
+.solution-points li{
+  display: grid;
+  grid-template-columns: 9em 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.solution-points span{
+  color: #ffffff;
+  font-weight:600;
+  letter-spacing:.15em;
+  opacity:.9;
+}
+
+/* ===== PCレイアウト ===== */
+@media (min-width:900px){
+  .solution h2{
+  font-size:34px;
+  }
+
+.solution-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items:start;
+}
+
+  .solution-copy{
+    max-width:none;
+  }
+
+  .solution-points{
+    grid-column:2;
+  }
+
+}
+
+/* =========================
+   特徴
+   ========================= */
+.features .feature-box{
+  padding:28px 24px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.015);
+  transition:.35s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+}
+
+.features .feature-box:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,0.25);
+}
+
+.feature-box{
+  min-height:110px;
+}
+
+.features h2{
+  margin-bottom:60px;
+}
+
+.features h3{
+  margin:0 0 12px;
+  font-weight:600;
+  letter-spacing:.10em;
+}
+
+.features p{
+  margin:0;
+  color:#bdbdbd;
+  line-height:1.9;
+}
+
+.features-grid{
+  display:grid;
+  gap:18px;
+}
+
+@media (min-width: 900px){
+  .features-grid{
+    grid-template-columns: repeat(3, 1fr);
+    gap:24px;
+  }
+}
+
+/* =========================
+   写真
+   ========================= */
+
+.gallery-grid{
+  display:grid;
+  gap:32px;
+}
+
+.gallery-grid img{
+  width:100%;
+  border-radius:4px;
+  transition: transform .4s ease;
+}
+
+.gallery-grid img:hover{
+  transform: scale(1.04);
+}
+
+@media(min-width:900px){
+  .gallery-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* =========================
+   料金（grid統一）
+   ========================= */
+.pricing{
+  background:var(--panel);
+}
+
+.pricing .pricing-lead{
+  color:var(--muted);
+  letter-spacing:0.1em;
+  margin:10px 0 40px;
+}
+
+/* =========================
+   選ばれる理由
+   ========================= */
+
+.reason{
+  padding:120px 0;
+}
+
+.reason-grid{
+  display:grid;
+  gap:24px;
+}
+
+.reason-box{
+  border:1px solid rgba(255,255,255,0.08);
+  padding:28px 24px;
+  background:rgba(255,255,255,0.02);
+}
+
+.reason-box h3{
+  margin:0 0 10px;
+  font-weight:600;
+  letter-spacing:.08em;
+}
+
+.reason-box p{
+  margin:0;
+  color:#bdbdbd;
+  line-height:1.9;
+}
+
+@media (min-width:900px){
+  .reason-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* 料金カード全体 */
+.plans{
+  display:grid;
+  gap:28px;
+  max-width:920px;
+  margin:0;
+}
+
+.plan{
+  border:1px solid var(--line);
+  padding:38px 22px;
+  background:rgba(255,255,255,0.02);
+  transition:.35s ease;
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+
+.plan:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,255,255,0.35);
+}
+
+/* プラン名 */
+.plan h3{
+  font-weight:300;
+  letter-spacing:.35em;
+  margin:0 0 18px;
+  opacity:.92;
+}
+
+/* 月◯回 + 価格 を中央でまとまり表示 */
+.price-row{
+  display:inline-flex;
+  align-items:baseline;
+  gap:28px;
+  margin:0 auto 14px;
+}
+
+.cycle{
+  font-size:14px;
+  opacity:.6;
+  letter-spacing:.12em;
+}
+
+.amount{
+  font-size:32px;
+  font-weight:600;
+  letter-spacing:.02em;
+}
+
+/* 料金コピー（強め） */
+.desc{
+  margin:0;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:.06em;
+  opacity:.92;
+  line-height:1.6;
+}
+
+/* PCで3カラム */
+@media (min-width: 900px){
+  .plans{
+    grid-template-columns:repeat(3, 1fr);
+  }
+  .plan{
+    padding:46px 26px;
+  }
+  .amount{
+    font-size:30px; /* でかすぎ防止 */
+  }
+}
+
+.closing-line{
+  color:#bdbdbd;
+  letter-spacing:.08em;
+  margin-top:20px;
+}
+
+/* =========================
+   トレーナー
+   ========================= */
+
+.trainer{
+  background:#0c0c0d;
+}
+
+.trainer-grid{
+  display:grid;
+  gap:30px;
+  align-items:center;
+}
+
+.trainer-image img{
+  width:100%;
+  filter: grayscale(20%);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+.trainer-role{
+  font-size:14px;
+  letter-spacing:.15em;
+  color:#aaa;
+  margin-bottom:18px;
+}
+
+.trainer-message{
+  line-height:1.9;
+  color:#cfcfcf;
+}
+
+@media (min-width:900px){
+  .trainer-grid{
+    grid-template-columns: 1fr 1fr;
+    gap:60px;
+  }
+}
+
+.container{
+  width:min(1000px,100%);
+  margin:0 auto;
+  padding:0 24px;
+}
+
+/* =========================
+   CTA
+   ========================= */
+.cta{
+  background: #0c0c0d;
+  text-align:center;
+  padding:140px 0;
+}
+
+.cta .btn{
+  margin-top:30px;
+  font-size:16px;
+  letter-spacing:.08em;
+  padding:16px 36px;
+}
+
+.cta .btn:hover{
+  background: #e5e5e5;
+  color: #0f0f10;
+}
+
+.cta h2::after{
+  display:none;
+}
+
+/* ===== フッター ===== */
+footer{
+  text-align:center;
+  padding:20px;
+  background:#060606;
+  font-size:12px;
+  color:#bbb;
+  letter-spacing:.2em;
+}
+
+.fade{
+  opacity:5;
+  transform:translateY(20px);
+  transition:all .8s ease;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
